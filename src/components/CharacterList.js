@@ -28,9 +28,7 @@ function CharacterList () {
     <section className="character-list">
       {characters.map(character => {
         return (
-        <Link to={`/characters/${character.id}`} key={character.id}>
-        <CharacterCard/>
-        </Link>
+        <CharacterCard key={character.id} character={character}/>
         );
         })}
     </section>
