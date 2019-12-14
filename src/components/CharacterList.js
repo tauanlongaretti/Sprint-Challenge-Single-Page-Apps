@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import CharacterCard from "./CharacterCard"
+import styled from "styled-components";
+
+const StylingDiv = styled.div`
+  margin: 0 auto;
+  text-align: center;
+`;
 
 function CharacterList () {
   // TODO: Add useState to track data from useEffect
@@ -28,7 +34,9 @@ function CharacterList () {
     <section className="character-list">
       {characters.map(character => {
         return (
-        <CharacterCard key={character.id} character={character}/>
+        <StylingDiv>
+          <CharacterCard key={character.id} character={character}/>
+        </StylingDiv>
         );
         })}
     </section>
