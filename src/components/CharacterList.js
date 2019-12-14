@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import CharacterCard from "./CharacterCard"
 import styled from "styled-components";
 
 const StylingDiv = styled.div`
-  margin: 0 auto;
+  display: inline-block;
+  padding: 1%;
+  margin: 8px;
   text-align: center;
 `;
 
