@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import CharacterCard from "./CharacterCard"
+import CharacterCard from "./CharacterCard";
 import styled from "styled-components";
 
 const StylingDiv = styled.div`
   display: inline-block;
   padding: 1%;
-  margin: 8px;
   text-align: center;
 `;
 
 function CharacterList () {
   // TODO: Add useState to track data from useEffect
-  const [characters, setCharacters] = useState([])
-
+  const [characters, setCharacters] = useState([]);
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
     //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
@@ -34,10 +32,10 @@ function CharacterList () {
   return (
     <section className="character-list">
       {characters.map(character => {
-        return (
+        return (        
         <StylingDiv>
           <CharacterCard key={character.id} character={character}/>
-        </StylingDiv>
+        </StylingDiv>      
         );
         })}
     </section>

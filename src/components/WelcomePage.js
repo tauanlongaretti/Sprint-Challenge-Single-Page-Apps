@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const WelcomePageStyling = styled.div`
-  margin: 60px;
+  margin: 70px;
   text-align: center;
   font-weight: bold;
   font-size: 30px;
@@ -11,7 +11,7 @@ const WelcomePageStyling = styled.div`
 
 const HeaderOne = styled.h1`
   font-size: 30px;
-  margin: 50px;
+  margin: 80px;
 `;
 
 export default function WelcomePage() {

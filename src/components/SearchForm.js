@@ -1,42 +1,70 @@
-// import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import CharacterCard from "./CharacterCard";
+import styled from "styled-components";
 
-// function SearchForm() {
-//   const [searchTerm, setSearchTerm] = useState("");
-//   const [searchResult, setSearchResult] = useState();
+const ListStyling = styled.div`
+  display: inline-block;
+  padding: 1%;
+  text-align: center;
+`;
 
-//   useEffect(() => {}, [searchTerm]);
+const FormStyling = styled.form`
+  text-align:center;
+  margin: 50px;
+  font-size: 20px;
+`;
 
-//   const handleChange = event => {
-//     setSearchTerm(event.target.value);
+function SearchForm() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
-//     const result = characters.filter(character => {
-//       return character.toLowerCase().includes(searchTerm.toLowerCase());
-//     });
-//     setSearchResult(result);
-//   };
+  useEffect(() => {
+    const searchCharacters = () => {
+      axios
+        .get('https://rickandmortyapi.com/api/character/')
+        .then(response => {
 
-//   const test = () => {
-//     searchTerm = "search";
-//     console.log("search", searchTerm);
-//   };
+          const results = response.data.results.filter(character => {
+            return character.name.toLowerCase().includes(searchTerm.toLowerCase());
+          });
+          
+          setSearchResults(results);
+        });
+    };
 
-//     console.log("search term", searchTerm);
+    searchCharacters();
+  }, [searchTerm]);
 
-//   return (
-//     <section className="search-form">
-//       <form>
-//         <label htmlFor="name">Search: </label>
-//         <input id="name" type="text" name="textfield" placeholder="Search" onChange={handleChange} value={searchTerm}/>
-//       </form>  
-//       <div className="character-list">
-//         <ul>
-//           {searchResult.map(character => {
-//             return <li key={character}>{character}</li>;
-//           })}
-//         </ul>
-//       </div>
-//     </section>
-//   );
-// }
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
 
-// export default SearchForm;
+  return(
+    <div>
+      <FormStyling>
+        <label htmlFor="name">Search: </label>
+        <input 
+        id="name"
+        type="text"
+        name="textfield"
+        placeholder="Search for a character"
+        onChange={handleChange}
+        value={searchTerm}
+        />
+      </FormStyling>
+      <div>
+        <ul>
+          {searchResults.map(response => {
+            return (
+              <ListStyling>        
+                <CharacterCard key={response.id} character={response}/>
+              </ListStyling>
+            )})}  
+        </ul>
+      </div>
+    </div> 
+  )
+}
+
+export default SearchForm;
